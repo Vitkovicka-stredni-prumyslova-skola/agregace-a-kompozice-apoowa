@@ -1,3 +1,5 @@
+using System.Runtime.CompilerServices;
+
 namespace AgregaceAKompozice
 {
     public class TridniKniha
@@ -12,9 +14,17 @@ namespace AgregaceAKompozice
 
     public void ZapisDochazku(Student s, DateOnly datum, bool pritomen)
     {
-        // TODO:
-        // pokud student není v dictionary, vytvoř list
-        // pak přidej nový ZaznamDochazky
+       if(s == null) throw new ArgumentNullException(nameof(s));
+
+       if(!_dochazka.ConstainsKey(s) ||  _dochazka[s].Count == 0)
+       {
+        Console.WriteLine("žádné záznamy");
+        return;
+       }
+       foreach(var zaznam in _dochazka[s])
+       {
+        Console.WriteLine(zaznam);
+       }
     }
 
     public void VypisDochazku(Student s)
